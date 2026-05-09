@@ -2,13 +2,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>Happy Birthday Zofia!</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+
+  <link rel="stylesheet" href="./style.css">
 </head>
+
 <body>
 
 <!-- Custom cursor -->
@@ -28,19 +31,23 @@
 
 <!-- Lightbox -->
 <div class="lightbox" id="lightbox">
-  <div class="lightbox-close" id="lightboxClose">✕ Close</div>
+
+  <div class="lightbox-close" id="lightboxClose">
+    ✕ Close
+  </div>
 
   <div class="lightbox-content">
+
     <div class="lightbox-img-wrap" id="lightboxImgWrap">
-      <div class="lightbox-caption" id="lightboxCaption"></div>
-
-
-        <p id="lightboxLabel">Photo</p>
-      </div>
-
+      <!-- obrázok sa vloží cez JS -->
     </div>
 
+    <div class="lightbox-caption" id="lightboxCaption"></div>
+
+    <p id="lightboxLabel">Photo</p>
+
   </div>
+</div>
 
 <!-- HERO -->
 <section id="hero">
@@ -53,10 +60,12 @@
   </div>
 
   <div class="orb"
-       style="width:300px;height:300px;background:rgba(120,50,200,0.06);top:10%;left:-5%;animation-delay:-2s;"></div>
+       style="width:300px;height:300px;background:rgba(120,50,200,0.06);top:10%;left:-5%;animation-delay:-2s;">
+  </div>
 
   <div class="orb"
-       style="width:200px;height:200px;background:rgba(100,30,180,0.08);bottom:20%;right:5%;animation-delay:-6s;animation-duration:15s;"></div>
+       style="width:200px;height:200px;background:rgba(100,30,180,0.08);bottom:20%;right:5%;animation-delay:-6s;animation-duration:15s;">
+  </div>
 
   <div class="hero-inner">
 
@@ -69,6 +78,7 @@
       <svg class="moon-svg-hero" viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg">
 
         <defs>
+
           <radialGradient id="mhg" cx="38%" cy="35%" r="58%">
             <stop offset="0%" stop-color="#f0e4ff"/>
             <stop offset="40%" stop-color="#d4b0ff"/>
@@ -78,6 +88,7 @@
           <clipPath id="mc">
             <circle cx="70" cy="70" r="54"/>
           </clipPath>
+
         </defs>
 
         <circle cx="70" cy="70" r="54" fill="url(#mhg)"/>
@@ -88,29 +99,49 @@
         <circle cx="30" cy="70" r="3" fill="rgba(255,255,255,0.07)"/>
 
       </svg>
+
     </div>
 
     <div class="hero-greeting">I wish you the</div>
-    <div class="hero-title">Happiest birthday</div>
-    <div class="hero-subtitle">my love</div>
+
+    <div class="hero-title">
+      Happiest birthday
+    </div>
+
+    <div class="hero-subtitle">
+      my love
+    </div>
 
     <div class="hero-divider">
+
       <div class="hero-divider-line"></div>
+
       <span>✦</span>
+
       <div class="hero-divider-line"></div>
+
     </div>
 
     <div class="hero-age">
+
       <div class="hero-age-num">23</div>
-      <div class="hero-age-label">years of starlit journey</div>
+
+      <div class="hero-age-label">
+        years of starlit journey
+      </div>
+
     </div>
 
     <div class="scroll-hint">
+
       <span>Scroll down</span>
+
       <div class="scroll-line"></div>
+
     </div>
 
   </div>
+
 </section>
 
 <!-- QUOTE -->
@@ -140,7 +171,9 @@
           font-family="Cinzel,serif"
           font-size="9"
           letter-spacing="3"
-          text-anchor="middle">TAURUS</text>
+          text-anchor="middle">
+      TAURUS
+    </text>
 
   </svg>
 
@@ -148,9 +181,7 @@
 
     <span class="quote-mark reveal">"</span>
 
-    <p class="quote-text reveal reveal-delay-1">
-
-    </p>
+    <p class="quote-text reveal reveal-delay-1"></p>
 
     <p class="quote-attribution reveal reveal-delay-2">
       · If you’re reading this now,
@@ -166,117 +197,166 @@
     </p>
 
   </div>
+
 </section>
 
 <!-- GALLERY -->
 <section id="gallery">
 
   <div class="orb"
-       style="width:400px;height:400px;background:rgba(100,30,180,0.05);top:20%;left:-10%;"></div>
+       style="width:400px;height:400px;background:rgba(100,30,180,0.05);top:20%;left:-10%;">
+  </div>
 
   <div class="gallery-header">
-    <span class="gallery-eyebrow reveal">✦ Our memories ✦</span>
+
+    <span class="gallery-eyebrow reveal">
+      ✦ Our memories ✦
+    </span>
+
     <h2 class="gallery-title reveal reveal-delay-1">
       Moments beneath the stars
     </h2>
+
   </div>
 
   <div class="gallery-grid" id="galleryGrid">
 
+    <!-- ITEM 1 -->
     <div class="gallery-item large reveal"
          onclick="openLightbox(this)"
          data-label="Look into my eyes">
 
-      <img src="first_prom.jpeg" alt="Memory 1">
+      <img src="./first_prom.jpeg" alt="Memory 1">
 
       <div class="gallery-placeholder">
+
         <span class="gallery-icon">🌙</span>
-        <span class="gallery-label">Our first prom night (not last)</span>
+
+        <span class="gallery-label">
+          Our first prom night (not last)
+        </span>
+
       </div>
 
       <div class="gallery-overlay">
         <span class="gallery-overlay-text">View</span>
       </div>
+
     </div>
 
+    <!-- ITEM 2 -->
     <div class="gallery-item reveal reveal-delay-1"
-         data-label="Flowers = Happiness"
-         onclick="openLightbox(this)">
+         onclick="openLightbox(this)"
+         data-label="Flowers = Happiness">
 
-      <img src="birthday.jpg" alt="Memory 2">
+      <img src="./birthday.jpg" alt="Memory 2">
 
       <div class="gallery-placeholder">
+
         <span class="gallery-icon">🎉</span>
-        <span class="gallery-label">Your first birthday with me</span>
+
+        <span class="gallery-label">
+          Your first birthday with me
+        </span>
+
       </div>
 
       <div class="gallery-overlay">
         <span class="gallery-overlay-text">View</span>
       </div>
+
     </div>
 
+    <!-- ITEM 3 -->
     <div class="gallery-item reveal reveal-delay-1"
-         data-label="Many stunning views and of course you ;)"
-         onclick="openLightbox(this)">
+         onclick="openLightbox(this)"
+         data-label="Many stunning views and of course you ;)">
 
-      <img src="vacation.jpg" alt="Memory 3">
+      <img src="./vacation.jpg" alt="Memory 3">
 
       <div class="gallery-placeholder">
+
         <span class="gallery-icon">🏖️</span>
-        <span class="gallery-label">Our first vacation</span>
+
+        <span class="gallery-label">
+          Our first vacation
+        </span>
+
       </div>
 
       <div class="gallery-overlay">
         <span class="gallery-overlay-text">View</span>
       </div>
+
     </div>
 
+    <!-- ITEM 4 -->
     <div class="gallery-item reveal reveal-delay-2"
-         data-label="Sorry I had to <3"
-         onclick="openLightbox(this)">
+         onclick="openLightbox(this)"
+         data-label="Sorry I had to <3">
+
+      <img src="./tired.jpg" alt="Memory 4">
 
       <div class="gallery-placeholder">
+
         <span class="gallery-icon">😴</span>
-        <span class="gallery-label">Sometimes you get tired</span>
-      </div>
 
-      <img src="tired.jpg" alt="Memory 4">
+        <span class="gallery-label">
+          Sometimes you get tired
+        </span>
+
+      </div>
 
       <div class="gallery-overlay">
         <span class="gallery-overlay-text">View</span>
       </div>
+
     </div>
 
+    <!-- ITEM 5 -->
     <div class="gallery-item reveal reveal-delay-2"
-         data-label="I love so muuch ! "
-         onclick="openLightbox(this)">
+         onclick="openLightbox(this)"
+         data-label="I love so muuch !">
 
-      <img src="stunning.jpg" alt="Memory 5">
+      <img src="./stunning.jpg" alt="Memory 5">
 
       <div class="gallery-placeholder">
+
         <span class="gallery-icon">❤️</span>
-        <span class="gallery-label">Sooo gorgeous girlfriend</span>
+
+        <span class="gallery-label">
+          Sooo gorgeous girlfriend
+        </span>
+
       </div>
 
       <div class="gallery-overlay">
         <span class="gallery-overlay-text">View</span>
       </div>
+
     </div>
 
+    <!-- ITEM 6 -->
     <div class="gallery-item large reveal reveal-delay-3"
-         data-label="Haaa"
-         onclick="openLightbox(this)">
+         onclick="openLightbox(this)"
+         data-label="Haaa">
 
-      <img src="look.jpg" alt="Memory 6">
+      <img src="./look.jpg" alt="Memory 6">
 
       <div class="gallery-placeholder">
+
         <span class="gallery-icon">😬</span>
-        <span class="gallery-label">Your most iconic look</span>
+
+        <span class="gallery-label">
+          Your most iconic look
+        </span>
+
       </div>
 
       <div class="gallery-overlay">
         <span class="gallery-overlay-text">View</span>
       </div>
+
     </div>
 
   </div>
@@ -291,14 +371,17 @@
 <section id="closing">
 
   <div class="corners">
+
     <div class="corner c-tl"></div>
     <div class="corner c-tr"></div>
     <div class="corner c-bl"></div>
     <div class="corner c-br"></div>
+
   </div>
 
   <div class="orb"
-       style="width:350px;height:350px;background:rgba(140,60,220,0.07);top:30%;right:-5%;"></div>
+       style="width:350px;height:350px;background:rgba(140,60,220,0.07);top:30%;right:-5%;">
+  </div>
 
   <div class="closing-inner">
 
@@ -317,9 +400,13 @@
     </p>
 
     <div class="hero-divider reveal reveal-delay-3">
+
       <div class="hero-divider-line"></div>
+
       <span>♉</span>
+
       <div class="hero-divider-line"></div>
+
     </div>
 
     <p class="closing-signature reveal reveal-delay-4">
@@ -330,7 +417,8 @@
 
 </section>
 
-<script src="main.js"></script>
+<!-- JS MUSÍ BYŤ ÚPLNE NA KONCI -->
+<script src="./main.js"></script>
 
 </body>
 </html>
