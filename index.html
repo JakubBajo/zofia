@@ -1,483 +1,337 @@
-/* =============================================================
-   BIRTHDAY WEBSITE — main.js
-   =============================================================
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday Zofia!</title>
 
-   OBSAH:
-   1. Animácia hviezd (canvas)
-   1.5 Padajúce hviezdy
-   2. Vlastný kurzor
-   3. Parallax & scroll reveal
-   4. Navigačné bodky
-   5. Galéria — stagger efekt
-   6. Lightbox
-   ============================================================= */
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+<!-- Custom cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
 
-/* ─────────────────────────────────────────────────────────────
-   1. ANIMÁCIA HVIEZD
-───────────────────────────────────────────────────────────── */
+<!-- Stars background -->
+<canvas class="stars-bg" id="starsCanvas"></canvas>
 
-const starsCanvas = document.getElementById('starsCanvas');
-const starsCtx = starsCanvas.getContext('2d');
+<!-- Navigation dots -->
+<nav class="nav-dots" id="navDots">
+  <div class="nav-dot active" data-section="hero" title="Intro"></div>
+  <div class="nav-dot" data-section="quote" title="Message"></div>
+  <div class="nav-dot" data-section="gallery" title="Memories"></div>
+  <div class="nav-dot" data-section="closing" title="Ending"></div>
+</nav>
 
-let stars = [];
-const shootingStars = [];
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-close" id="lightboxClose">✕ Close</div>
 
-/* Farba hviezd */
-const STAR_COLOR = '210, 175, 255';
+  <div class="lightbox-content">
+    <div class="lightbox-img-wrap" id="lightboxImgWrap">
+      <div class="lightbox-caption" id="lightboxCaption"></div>
 
-/* Hustota hviezd */
-const STAR_DENSITY = 6000;
 
+        <p id="lightboxLabel">Photo</p>
+      </div>
 
-/* ─────────────────────────────────────────────────────────────
-   Inicializácia hviezd
-───────────────────────────────────────────────────────────── */
+    </div>
 
-function initStars() {
+  </div>
+</div>
 
-  starsCanvas.width = window.innerWidth;
-  starsCanvas.height = window.innerHeight;
+<!-- HERO -->
+<section id="hero">
 
-  stars = [];
+  <div class="corners">
+    <div class="corner c-tl"></div>
+    <div class="corner c-tr"></div>
+    <div class="corner c-bl"></div>
+    <div class="corner c-br"></div>
+  </div>
 
-  const count = Math.floor(
-    (starsCanvas.width * starsCanvas.height) / STAR_DENSITY
-  );
+  <div class="orb"
+       style="width:300px;height:300px;background:rgba(120,50,200,0.06);top:10%;left:-5%;animation-delay:-2s;"></div>
 
-  for (let i = 0; i < count; i++) {
+  <div class="orb"
+       style="width:200px;height:200px;background:rgba(100,30,180,0.08);bottom:20%;right:5%;animation-delay:-6s;animation-duration:15s;"></div>
 
-    stars.push({
-      x: Math.random(),
-      y: Math.random(),
+  <div class="hero-inner">
 
-      r: Math.random() * 1.3 + 0.2,
+    <div class="hero-zodiac">· My beloved Taurus ·</div>
 
-      phase: Math.random() * Math.PI * 2,
-      speed: 0.2 + Math.random() * 0.8,
+    <div class="hero-moon">
 
-      opacity: Math.random() * 0.6 + 0.1
-    });
-  }
-}
+      <div class="moon-glow-hero"></div>
 
+      <svg class="moon-svg-hero" viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg">
 
-/* ─────────────────────────────────────────────────────────────
-   PADAJÚCE HVIEZDY
-───────────────────────────────────────────────────────────── */
+        <defs>
+          <radialGradient id="mhg" cx="38%" cy="35%" r="58%">
+            <stop offset="0%" stop-color="#f0e4ff"/>
+            <stop offset="40%" stop-color="#d4b0ff"/>
+            <stop offset="100%" stop-color="#6a30a0"/>
+          </radialGradient>
 
-function createShootingStar() {
+          <clipPath id="mc">
+            <circle cx="70" cy="70" r="54"/>
+          </clipPath>
+        </defs>
 
-  const startX = Math.random() * starsCanvas.width;
-  const startY = Math.random() * starsCanvas.height * 0.45;
+        <circle cx="70" cy="70" r="54" fill="url(#mhg)"/>
+        <circle cx="97" cy="48" r="46" fill="#07040f" clip-path="url(#mc)"/>
 
-  shootingStars.push({
+        <circle cx="40" cy="52" r="5" fill="rgba(255,255,255,0.06)"/>
+        <circle cx="60" cy="78" r="8" fill="rgba(255,255,255,0.04)"/>
+        <circle cx="30" cy="70" r="3" fill="rgba(255,255,255,0.07)"/>
 
-    x: startX,
-    y: startY,
+      </svg>
+    </div>
 
-    length: 90 + Math.random() * 120,
+    <div class="hero-greeting">I wish you the</div>
+    <div class="hero-title">Happiest birthday</div>
+    <div class="hero-subtitle">my love</div>
 
-    speed: 7 + Math.random() * 5,
+    <div class="hero-divider">
+      <div class="hero-divider-line"></div>
+      <span>✦</span>
+      <div class="hero-divider-line"></div>
+    </div>
 
-    life: 0,
-    maxLife: 65 + Math.random() * 30,
+    <div class="hero-age">
+      <div class="hero-age-num">23</div>
+      <div class="hero-age-label">years of starlit journey</div>
+    </div>
 
-    opacity: 0.18 + Math.random() * 0.22
-  });
-}
+    <div class="scroll-hint">
+      <span>Scroll down</span>
+      <div class="scroll-line"></div>
+    </div>
 
+  </div>
+</section>
 
-function animateShootingStars() {
+<!-- QUOTE -->
+<section id="quote">
 
-  for (let i = shootingStars.length - 1; i >= 0; i--) {
+  <div class="quote-parallax-bg"></div>
 
-    const s = shootingStars[i];
+  <svg class="taurus-constellation parallax-slow"
+       width="180"
+       height="200"
+       viewBox="0 0 180 200"
+       xmlns="http://www.w3.org/2000/svg">
 
-    s.x += s.speed;
-    s.y += s.speed * 0.55;
+    <circle cx="90" cy="160" r="3" fill="rgba(200,160,255,0.6)"/>
+    <circle cx="60" cy="130" r="2" fill="rgba(200,160,255,0.5)"/>
+    <circle cx="120" cy="130" r="2" fill="rgba(200,160,255,0.5)"/>
 
-    s.life++;
+    <line x1="90" y1="160" x2="60" y2="130"
+          stroke="rgba(200,160,255,0.15)" stroke-width="0.8"/>
 
-    const alpha =
-      s.opacity * (1 - s.life / s.maxLife);
-
-    const gradient = starsCtx.createLinearGradient(
-      s.x,
-      s.y,
-      s.x - s.length,
-      s.y - s.length * 0.55
-    );
+    <line x1="90" y1="160" x2="120" y2="130"
+          stroke="rgba(200,160,255,0.15)" stroke-width="0.8"/>
 
-    gradient.addColorStop(
-      0,
-      `rgba(${STAR_COLOR}, ${alpha})`
-    );
+    <text x="90"
+          y="185"
+          fill="rgba(200,160,255,0.3)"
+          font-family="Cinzel,serif"
+          font-size="9"
+          letter-spacing="3"
+          text-anchor="middle">TAURUS</text>
 
-    gradient.addColorStop(
-      1,
-      `rgba(${STAR_COLOR}, 0)`
-    );
+  </svg>
 
-    starsCtx.beginPath();
+  <div class="quote-inner">
 
-    starsCtx.strokeStyle = gradient;
-    starsCtx.lineWidth = 1.2;
+    <span class="quote-mark reveal">"</span>
 
-    starsCtx.moveTo(s.x, s.y);
+    <p class="quote-text reveal reveal-delay-1">
 
-    starsCtx.lineTo(
-      s.x - s.length,
-      s.y - s.length * 0.55
-    );
+    </p>
 
-    starsCtx.stroke();
+    <p class="quote-attribution reveal reveal-delay-2">
+      · If you’re reading this now,
+      it means you made it all the way to the sky -
+      where little surprises have been waiting for you.
 
-    if (s.life >= s.maxLife) {
-      shootingStars.splice(i, 1);
-    }
-  }
-}
+      And before this night truly begins,
+      I just want to wish you the happiest birthday,
+      filled with love, laughter,
+      and moments you’ll never forget.
 
+      I love you more than words could ever hold. ·
+    </p>
 
-/* ─────────────────────────────────────────────────────────────
-   HLAVNÁ ANIMÁCIA CANVASU
-───────────────────────────────────────────────────────────── */
+  </div>
+</section>
 
-function animateStars(timestamp) {
+<!-- GALLERY -->
+<section id="gallery">
 
-  starsCtx.clearRect(
-    0,
-    0,
-    starsCanvas.width,
-    starsCanvas.height
-  );
+  <div class="orb"
+       style="width:400px;height:400px;background:rgba(100,30,180,0.05);top:20%;left:-10%;"></div>
 
-  /* Klasické hviezdy */
-  stars.forEach(star => {
+  <div class="gallery-header">
+    <span class="gallery-eyebrow reveal">✦ Our memories ✦</span>
+    <h2 class="gallery-title reveal reveal-delay-1">
+      Moments beneath the stars
+    </h2>
+  </div>
 
-    const alpha =
-      star.opacity *
-      (
-        0.4 +
-        0.6 *
-        (
-          0.5 +
-          0.5 *
-          Math.sin(
-            timestamp *
-            star.speed *
-            0.0008 +
-            star.phase
-          )
-        )
-      );
+  <div class="gallery-grid" id="galleryGrid">
 
-    starsCtx.beginPath();
+    <div class="gallery-item large reveal"
+         onclick="openLightbox(this)"
+         data-label="Look into my eyes">
 
-    starsCtx.arc(
-      star.x * starsCanvas.width,
-      star.y * starsCanvas.height,
-      star.r,
-      0,
-      Math.PI * 2
-    );
+      <img src="first_prom.jpeg" alt="Memory 1">
 
-    starsCtx.fillStyle =
-      `rgba(${STAR_COLOR}, ${alpha.toFixed(3)})`;
+      <div class="gallery-placeholder">
+        <span class="gallery-icon">🌙</span>
+        <span class="gallery-label">Our first prom night (not last)</span>
+      </div>
 
-    starsCtx.fill();
-  });
+      <div class="gallery-overlay">
+        <span class="gallery-overlay-text">View</span>
+      </div>
+    </div>
 
-  /* Shooting stars */
-  animateShootingStars();
+    <div class="gallery-item reveal reveal-delay-1"
+         data-label="Flowers = Happiness"
+         onclick="openLightbox(this)">
 
-  requestAnimationFrame(animateStars);
-}
+      <img src="birthday.jpg" alt="Memory 2">
 
+      <div class="gallery-placeholder">
+        <span class="gallery-icon">🎉</span>
+        <span class="gallery-label">Your first birthday with me</span>
+      </div>
 
-/* ─────────────────────────────────────────────────────────────
-   Náhodné spawnovanie padajúcich hviezd
-───────────────────────────────────────────────────────────── */
+      <div class="gallery-overlay">
+        <span class="gallery-overlay-text">View</span>
+      </div>
+    </div>
 
-function randomShootingStarLoop() {
+    <div class="gallery-item reveal reveal-delay-1"
+         data-label="Many stunning views and of course you ;)"
+         onclick="openLightbox(this)">
 
-  createShootingStar();
+      <img src="vacation.jpg" alt="Memory 3">
 
-  const nextDelay =
-    5000 + Math.random() * 9000;
+      <div class="gallery-placeholder">
+        <span class="gallery-icon">🏖️</span>
+        <span class="gallery-label">Our first vacation</span>
+      </div>
 
-  setTimeout(
-    randomShootingStarLoop,
-    nextDelay
-  );
-}
+      <div class="gallery-overlay">
+        <span class="gallery-overlay-text">View</span>
+      </div>
+    </div>
 
+    <div class="gallery-item reveal reveal-delay-2"
+         data-label="Sorry I had to <3"
+         onclick="openLightbox(this)">
 
-/* Inicializácia */
-initStars();
+      <div class="gallery-placeholder">
+        <span class="gallery-icon">😴</span>
+        <span class="gallery-label">Sometimes you get tired</span>
+      </div>
 
-window.addEventListener(
-  'resize',
-  initStars
-);
+      <img src="tired.jpg" alt="Memory 4">
 
-requestAnimationFrame(animateStars);
+      <div class="gallery-overlay">
+        <span class="gallery-overlay-text">View</span>
+      </div>
+    </div>
 
-/* prvá shooting star */
-setTimeout(
-  randomShootingStarLoop,
-  3500
-);
+    <div class="gallery-item reveal reveal-delay-2"
+         data-label="I love so muuch ! "
+         onclick="openLightbox(this)">
 
+      <img src="stunning.jpg" alt="Memory 5">
 
-/* ─────────────────────────────────────────────────────────────
-   2. VLASTNÝ KURZOR
-───────────────────────────────────────────────────────────── */
+      <div class="gallery-placeholder">
+        <span class="gallery-icon">❤️</span>
+        <span class="gallery-label">Sooo gorgeous girlfriend</span>
+      </div>
 
-const cursorDot = document.getElementById('cursor');
-const cursorRing = document.getElementById('cursorRing');
+      <div class="gallery-overlay">
+        <span class="gallery-overlay-text">View</span>
+      </div>
+    </div>
 
-let mouseX = 0;
-let mouseY = 0;
+    <div class="gallery-item large reveal reveal-delay-3"
+         data-label="Haaa"
+         onclick="openLightbox(this)">
 
-let ringX = 0;
-let ringY = 0;
+      <img src="look.jpg" alt="Memory 6">
 
-const RING_LERP = 0.12;
+      <div class="gallery-placeholder">
+        <span class="gallery-icon">😬</span>
+        <span class="gallery-label">Your most iconic look</span>
+      </div>
 
+      <div class="gallery-overlay">
+        <span class="gallery-overlay-text">View</span>
+      </div>
+    </div>
 
-document.addEventListener('mousemove', e => {
+  </div>
 
-  mouseX = e.clientX;
-  mouseY = e.clientY;
+  <p class="gallery-hint reveal reveal-delay-4">
+    “Only six photos, yet every one of them carries a piece of our story.”
+  </p>
 
-  cursorDot.style.left = mouseX + 'px';
-  cursorDot.style.top = mouseY + 'px';
-});
+</section>
 
+<!-- CLOSING -->
+<section id="closing">
 
-function animateCursor() {
+  <div class="corners">
+    <div class="corner c-tl"></div>
+    <div class="corner c-tr"></div>
+    <div class="corner c-bl"></div>
+    <div class="corner c-br"></div>
+  </div>
 
-  ringX += (mouseX - ringX) * RING_LERP;
-  ringY += (mouseY - ringY) * RING_LERP;
+  <div class="orb"
+       style="width:350px;height:350px;background:rgba(140,60,220,0.07);top:30%;right:-5%;"></div>
 
-  cursorRing.style.left = ringX + 'px';
-  cursorRing.style.top = ringY + 'px';
+  <div class="closing-inner">
 
-  requestAnimationFrame(animateCursor);
-}
+    <span class="closing-symbol reveal">✦</span>
 
-animateCursor();
+    <h2 class="closing-title reveal reveal-delay-1">
+      The Night Begins
+    </h2>
 
+    <p class="closing-message reveal reveal-delay-2">
+      “One last thing remains before this birthday wish and our little moment of nostalgia come to an end…
+      but our night together is only just beginning.
+      So there is only one thing left for you to do -
+      put on something beautiful, step into the car,
+      and leave the rest of this unforgettable evening to me.”
+    </p>
 
-const hoverTargets = document.querySelectorAll(
-  'a, .gallery-item, .nav-dot, .lightbox-close, button'
-);
+    <div class="hero-divider reveal reveal-delay-3">
+      <div class="hero-divider-line"></div>
+      <span>♉</span>
+      <div class="hero-divider-line"></div>
+    </div>
 
-hoverTargets.forEach(el => {
+    <p class="closing-signature reveal reveal-delay-4">
+      With love · Beneath the night sky
+    </p>
 
-  el.addEventListener(
-    'mouseenter',
-    () => cursorRing.classList.add('hover')
-  );
+  </div>
 
-  el.addEventListener(
-    'mouseleave',
-    () => cursorRing.classList.remove('hover')
-  );
-});
+</section>
 
+<script src="main.js"></script>
 
-/* ─────────────────────────────────────────────────────────────
-   3. PARALLAX & SCROLL REVEAL
-───────────────────────────────────────────────────────────── */
-
-const parallaxEl =
-  document.querySelector('.parallax-slow');
-
-const REVEAL_THRESHOLD = 0.88;
-const PARALLAX_SPEED = 0.15;
-
-
-function onScroll() {
-
-  const scrollY = window.scrollY;
-
-  if (parallaxEl) {
-    parallaxEl.style.transform =
-      `translateY(${scrollY * PARALLAX_SPEED}px)`;
-  }
-
-  updateNavDots();
-  revealElements();
-}
-
-window.addEventListener(
-  'scroll',
-  onScroll,
-  { passive: true }
-);
-
-
-/* ─────────────────────────────────────────────────────────────
-   4. NAVIGAČNÉ BODKY
-───────────────────────────────────────────────────────────── */
-
-const allSections =
-  document.querySelectorAll('section');
-
-const navDots =
-  document.querySelectorAll('.nav-dot');
-
-
-function updateNavDots() {
-
-  let currentSection = 'hero';
-
-  allSections.forEach(sec => {
-
-    const rect = sec.getBoundingClientRect();
-
-    if (rect.top <= window.innerHeight * 0.4) {
-      currentSection = sec.id;
-    }
-  });
-
-  navDots.forEach(dot => {
-
-    dot.classList.toggle(
-      'active',
-      dot.dataset.section === currentSection
-    );
-  });
-}
-
-
-navDots.forEach(dot => {
-
-  dot.addEventListener('click', () => {
-
-    const target =
-      document.getElementById(dot.dataset.section);
-
-    if (target) {
-
-      target.scrollIntoView({
-        behavior: 'smooth'
-      });
-    }
-  });
-});
-
-
-/* ─────────────────────────────────────────────────────────────
-   5. GALÉRIA — STAGGER REVEAL
-───────────────────────────────────────────────────────────── */
-
-const galleryItems =
-  document.querySelectorAll('.gallery-item');
-
-const GALLERY_DELAY_STEP = 0.08;
-
-galleryItems.forEach((item, index) => {
-
-  item.style.transitionDelay =
-    (index * GALLERY_DELAY_STEP) + 's';
-});
-
-
-/* ─────────────────────────────────────────────────────────────
-   REVEAL ELEMENTS
-───────────────────────────────────────────────────────────── */
-
-function revealElements() {
-
-  document
-    .querySelectorAll('.reveal:not(.visible)')
-    .forEach(el => {
-
-      const rect = el.getBoundingClientRect();
-
-      if (
-        rect.top <
-        window.innerHeight * REVEAL_THRESHOLD
-      ) {
-        el.classList.add('visible');
-      }
-    });
-}
-
-setTimeout(revealElements, 100);
-
-
-/* ─────────────────────────────────────────────────────────────
-   6. LIGHTBOX
-───────────────────────────────────────────────────────────── */
-
-function openLightbox(itemEl) {
-
-  const label =
-    itemEl.dataset.label || 'Fotografia';
-
-  const caption =
-    itemEl.dataset.caption || '';
-
-  lightboxLabel.textContent = label;
-  lightboxCaption.textContent = caption;
-
-  const img = itemEl.querySelector('img');
-
-  const existingImg =
-    lightboxImgWrap.querySelector('img');
-
-  if (existingImg) existingImg.remove();
-
-  if (img && img.src) {
-
-    const lightboxImg =
-      document.createElement('img');
-
-    lightboxImg.src = img.src;
-    lightboxImg.alt = label;
-
-    lightboxImgWrap.appendChild(lightboxImg);
-  }
-
-  lightbox.classList.add('open');
-
-  document.body.style.overflow = 'hidden';
-}
-
-
-function closeLightbox() {
-
-  lightbox.classList.remove('open');
-
-  document.body.style.overflow = '';
-}
-
-
-lightboxClose.addEventListener(
-  'click',
-  closeLightbox
-);
-
-
-lightbox.addEventListener('click', e => {
-
-  if (e.target === lightbox) {
-    closeLightbox();
-  }
-});
-
-
-document.addEventListener('keydown', e => {
-
-  if (e.key === 'Escape') {
-    closeLightbox();
-  }
-});
-
-
-window.openLightbox = openLightbox;
+</body>
+</html>
